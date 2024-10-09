@@ -25,28 +25,109 @@ ChatBot::ChatBot(std::string filename) {
   _rootNode = nullptr;
 
   // load image into heap memory
-  _image = new wxBitmap(filename, wxBITMAP_TYPE_PNG);
+   _image = std::make_unique<wxBitmap>(filename, wxBITMAP_TYPE_PNG);
 }
 
 ChatBot::~ChatBot() {
   std::cout << "ChatBot Destructor" << std::endl;
 
+  // No need to explicitly delete _image as unique_ptr handles it
+  /*
   // deallocate heap memory
   if (_image != NULL)  // Attention: wxWidgets used NULL and not nullptr
   {
     delete _image;
     _image = NULL;
   }
+  */C
 }
 
 //// STUDENT CODE
 ////
 
+// Copy constructor
+ChatBot::ChatBot(const ChatBot &chatbot) {
+  std::cout << "ChatBot Copy Constructor" << std::endl;
+
+  // creating a new wxBitmap from the source image if it exists
+  _image =
+      chatbot._image ? std::make_unique<wxBitmap>(*chatbot._image) : nullptr;
+
+  // copy raw pointers (not handling ownership)
+  _chatLogic = chatbot._chatLogic;
+  _rootNode = chatbot._rootNode;
+  _currentNode = chatbot._currentNode;
+}
+
+// Copy assignment operator
+ChatBot &ChatBot::operator=(const ChatBot &chatbot) {
+  std::cout << "ChatBot Copy Assignment Operator" << std::endl;
+
+  // Check for self-assignment
+  if (this == &chatbot) {
+    return *this;
+  }
+
+  // Handle image copy
+  if (chatbot._image) {
+    _image = std::make_unique<wxBitmap>(*chatbot._image);  // Deep copy
+  } else {
+    _image.reset();  // Reset if source image is null
+  }
+
+  // Copy raw pointers
+  _currentNode = chatbot._currentNode;
+  _rootNode = chatbot._rootNode;
+  _chatLogic = chatbot._chatLogic;
+
+  return *this;
+}
+
+// Move constructor
+ChatBot::ChatBot(ChatBot &&chatbot) noexcept {
+  std::cout << "ChatBot Move Constructor" << std::endl;
+
+  // Take ownership of resources
+  _image = std::move(chatbot._image);  // Transfer ownership of image
+  _currentNode = chatbot._currentNode;
+  _rootNode = chatbot._rootNode;
+  _chatLogic = chatbot._chatLogic;
+
+  // Nullify the source
+  chatbot._currentNode = nullptr;
+  chatbot._rootNode = nullptr;
+  chatbot._chatLogic = nullptr;
+}
+
+// Move assignment operator
+ChatBot &ChatBot::operator=(ChatBot &&chatbot) noexcept {
+  std::cout << "ChatBot Move Assignment Operator" << std::endl;
+
+  // Check for self-assignment
+  if (this == &chatbot) {
+    return *this;
+  }
+
+  // Move resources
+  _image = std::move(chatbot._image);  // Transfer ownership of image
+  _currentNode = chatbot._currentNode;
+  _rootNode = chatbot._rootNode;
+  _chatLogic = chatbot._chatLogic;
+
+  // Nullify the source
+  chatbot._currentNode = nullptr;
+  chatbot._rootNode = nullptr;
+  chatbot._chatLogic = nullptr;
+
+  return *this;
+}
+
 ////
 //// EOF STUDENT CODE
 
 void ChatBot::ReceiveMessageFromUser(std::string message) {
-  // loop over all edges and keywords and compute Levenshtein distance to query
+  // loop over all edges and keywords and compute Levenshtein distance to
+  // query
   typedef std::pair<GraphEdge *, int> EdgeDist;
   std::vector<EdgeDist> levDists;  // format is <ptr,levDist>
 
@@ -61,7 +142,8 @@ void ChatBot::ReceiveMessageFromUser(std::string message) {
   // select best fitting edge to proceed along
   GraphNode *newNode;
   if (levDists.size() > 0) {
-    // sort in ascending order of Levenshtein distance (best fit is at the top)
+    // sort in ascending order of Levenshtein distance (best fit is at the
+    // top)
     std::sort(levDists.begin(), levDists.end(),
               [](const EdgeDist &a, const EdgeDist &b) {
                 return a.second < b.second;
