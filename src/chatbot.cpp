@@ -25,7 +25,7 @@ ChatBot::ChatBot(std::string filename) {
   _rootNode = nullptr;
 
   // load image into heap memory
-   _image = std::make_unique<wxBitmap>(filename, wxBITMAP_TYPE_PNG);
+  _image = std::make_unique<wxBitmap>(filename, wxBITMAP_TYPE_PNG);
 }
 
 ChatBot::~ChatBot() {
@@ -39,7 +39,7 @@ ChatBot::~ChatBot() {
     delete _image;
     _image = NULL;
   }
-  */C
+  */
 }
 
 //// STUDENT CODE
