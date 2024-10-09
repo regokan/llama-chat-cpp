@@ -5,6 +5,7 @@
       "includePath": [
         "${workspaceFolder}/**",
         "/opt/homebrew/Cellar/wxwidgets/3.2.6/include/wx-3.2",
+        "/opt/homebrew/Cellar/wxwidgets/3.2.6/lib/wx/include/osx_cocoa-unicode-3.2",
         "${workspaceFolder}/include"
       ],
       "defines": [],
