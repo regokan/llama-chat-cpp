@@ -10,7 +10,7 @@ class ChatLogic;  // forward declaration
 class ChatBot {
  private:
   // data handles (owned)
-  std::unique_ptr<wxBitmap> _image;  // avatar image
+  wxBitmap *_image;  // avatar image
 
   // data handles (not owned)
   GraphNode *_currentNode;
@@ -46,7 +46,7 @@ class ChatBot {
   void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }
   void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
   ChatLogic *GetChatLogicHandle() { return _chatLogic; }
-  wxBitmap *GetImageHandle() { return _image.get(); }
+  wxBitmap *GetImageHandle() { return _image; }
 
   // communication
   void ReceiveMessageFromUser(std::string message);
