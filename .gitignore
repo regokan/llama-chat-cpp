@@ -5,3 +5,6 @@ build/
 
 # All local files
 *.local
+
+# VScode Settings
+.vscode/Settings.json
