@@ -1,0 +1,16 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+
+# Enable sorting of includes
+SortIncludes: true
+
+# Specify how include blocks are handled (Preserve means keeping blank lines between groups)
+IncludeBlocks: Preserve
+
+# Cstom ordering for different types of includes
+IncludeCategories:
+  - Regex: "^<.*>" # All standard and system headers
+    Priority: 1
+  - Regex: '^".*"' # All project-specific headers
+    Priority: 2
