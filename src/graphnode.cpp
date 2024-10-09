@@ -18,8 +18,8 @@ GraphNode::~GraphNode() {
 
 void GraphNode::AddToken(std::string token) { _answers.push_back(token); }
 
-void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
-  _parentEdges.push_back(edge);
+void GraphNode::AddEdgeToParentNode(std::unique_ptr<GraphEdge> edge) {
+  _parentEdges.push_back(std::move(edge));
 }
 
 void GraphNode::AddEdgeToChildNode(GraphEdge *edge) {

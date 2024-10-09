@@ -42,9 +42,12 @@ ChatLogic::~ChatLogic() {
   */
 
   // delete all edges
+  // No need to delete _edges as unique_ptr handles it
+  /*
   for (auto it = std::begin(_edges); it != std::end(_edges); ++it) {
     delete *it;
   }
+  */
 
   ////
   //// EOF STUDENT CODE
@@ -181,19 +184,19 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename) {
                   });
 
               // create new edge
-              GraphEdge *edge = new GraphEdge(id);
+              auto edge = std::make_unique<GraphEdge>(id);
               edge->SetChildNode(
                   childNode->get());  // using dereference operator
               edge->SetParentNode(
                   parentNode->get());  // using dereference operator
-              _edges.push_back(edge);
+              _edges.push_back(std::move(edge));
 
               // find all keywords for current node
               AddAllTokensToElement("KEYWORD", tokens, *edge);
 
               // store reference in child node and parent node
-              (*childNode)->AddEdgeToParentNode(edge);
-              (*parentNode)->AddEdgeToChildNode(edge);
+              (*childNode)->AddEdgeToParentNode(std::move(edge));
+              (*parentNode)->AddEdgeToChildNode(edge.get());
             }
 
             ////
