@@ -18,12 +18,12 @@ GraphNode::~GraphNode() {
 
 void GraphNode::AddToken(std::string token) { _answers.push_back(token); }
 
-void GraphNode::AddEdgeToParentNode(std::unique_ptr<GraphEdge> edge) {
-  _parentEdges.push_back(std::move(edge));
+void GraphNode::AddEdgeToChildNode(std::unique_ptr<GraphEdge> edge) {
+  _childEdges.push_back(std::move(edge));
 }
 
-void GraphNode::AddEdgeToChildNode(GraphEdge *edge) {
-  _childEdges.push_back(edge);
+void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
+  _parentEdges.push_back(edge);
 }
 
 //// STUDENT CODE
@@ -44,7 +44,7 @@ GraphEdge *GraphNode::GetChildEdgeAtIndex(int index) {
   //// STUDENT CODE
   ////
 
-  return _childEdges[index];
+  return _childEdges[index].get();
 
   ////
   //// EOF STUDENT CODE
