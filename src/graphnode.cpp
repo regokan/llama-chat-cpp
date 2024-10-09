@@ -7,7 +7,10 @@ GraphNode::~GraphNode() {
   //// STUDENT CODE
   ////
 
-  delete _chatBot;
+  // delete _chatBot;
+  // Commented out because GraphNode does not own the ChatBot instance.
+  // ChatLogic owns and manages the lifecycle of the ChatBot,
+  // so GraphNode should not be responsible for deleting it.
 
   ////
   //// EOF STUDENT CODE
