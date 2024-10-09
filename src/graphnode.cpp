@@ -28,13 +28,24 @@ void GraphNode::AddEdgeToParentNode(GraphEdge *edge) {
 
 //// STUDENT CODE
 ////
-void GraphNode::MoveChatbotHere(ChatBot chatbot) {
-  _chatBot = std::move(chatbot);
-  _chatBot.SetCurrentNode(this);
+void GraphNode::MoveChatbotHere(ChatBot &&chatbot) {
+  if (_chatBot) {
+    // Move assignment operator will be called here if _chatBot already exists
+    *_chatBot = std::move(chatbot);
+  } else {
+    // Move constructor will be called here if _chatBot does not exist
+    _chatBot = std::make_unique<ChatBot>(std::move(chatbot));
+  }
+  _chatBot->SetCurrentNode(this);
 }
 
 void GraphNode::MoveChatbotToNewNode(GraphNode *newNode) {
-  newNode->MoveChatbotHere(std::move(_chatBot));
+  // If _chatBot exists, move the actual ChatBot object (not just the
+  // unique_ptr)
+  if (_chatBot) {
+    newNode->MoveChatbotHere(std::move(*_chatBot));
+    _chatBot.reset();  // Clear the unique_ptr after moving
+  }
 }
 ////
 //// EOF STUDENT CODE
