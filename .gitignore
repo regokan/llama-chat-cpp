@@ -1,1 +1,7 @@
 .github/**
+
+# Build Folder
+build/
+
+# All local files
+*.local
