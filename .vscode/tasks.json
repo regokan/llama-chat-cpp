@@ -12,6 +12,18 @@
       },
       "problemMatcher": ["$gcc"],
       "detail": "Generated task for building the project using Makefile"
+    },
+    {
+      "label": "debug",
+      "type": "shell",
+      "command": "make",
+      "args": ["debug"],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "detail": "Generated task for debugging the project using Makefile"
     }
   ]
 }

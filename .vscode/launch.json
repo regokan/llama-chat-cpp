@@ -23,7 +23,7 @@
         "moduleLoad": true,
         "trace": true
       },
-      "preLaunchTask": "build"
+      "preLaunchTask": "debug"
     }
   ]
 }
