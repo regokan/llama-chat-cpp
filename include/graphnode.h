@@ -20,7 +20,7 @@ class GraphNode {
 
   // data handles (not owned)
   std::vector<GraphEdge *> _parentEdges;  // edges to preceding nodes
-  std::unique_ptr<ChatBot> _chatBot;      // Unique pointer for ownership
+  ChatBot _chatBot;
 
   ////
   //// EOF STUDENT CODE
