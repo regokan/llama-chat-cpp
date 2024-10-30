@@ -1,5 +1,3 @@
-Here is the updated `README` to include the setup instructions using `make`:
-
 # Membot
 
 ## Overview
@@ -104,3 +102,7 @@ The project consists of the following core classes and namespaces:
 - **`include/`**: Header files for each class.
 - **`CMakeLists.txt`**: The CMake configuration file.
 - **`Makefile`**: The Makefile to manage setup, build, and formatting tasks.
+
+## Future Development
+
+In future iterations, we aim to enhance Membot's user experience by developing a more versatile front end using the Qt framework. This will facilitate a rich, cross-platform interface, allowing the chatbot to run smoothly on various operating systems. Additionally, we plan to integrate [llama.cpp](https://github.com/ggerganov/llama.cpp) as the backend engine. This lightweight, C++-based solution will empower users to run the chatbot locally, eliminating the need for cloud dependencies and ensuring faster, more secure interactions.
