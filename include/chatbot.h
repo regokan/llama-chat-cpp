@@ -25,10 +25,6 @@ class ChatBot {
   ChatBot();                      // constructor WITHOUT memory allocation
   ChatBot(std::string filename);  // constructor WITH memory allocation
   ~ChatBot();
-
-  //// STUDENT CODE
-  ////
-
   // copy assignment constructor
   ChatBot &operator=(const ChatBot &chatbot);
   // copy operator
@@ -37,10 +33,6 @@ class ChatBot {
   ChatBot &operator=(ChatBot &&chatbot) noexcept;
   // move constructor
   ChatBot(ChatBot &&chatbot) noexcept;
-
-  ////
-  //// EOF STUDENT CODE
-
   // getters / setters
   void SetCurrentNode(GraphNode *node);
   void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }

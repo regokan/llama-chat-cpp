@@ -39,10 +39,6 @@ ChatBot::~ChatBot() {
     _image = NULL;
   }
 }
-
-//// STUDENT CODE
-////
-
 // Copy constructor
 ChatBot::ChatBot(const ChatBot &chatbot) {
   std::cout << "ChatBot Copy Constructor" << std::endl;
@@ -119,10 +115,6 @@ ChatBot &ChatBot::operator=(ChatBot &&chatbot) noexcept {
 
   return *this;
 }
-
-////
-//// EOF STUDENT CODE
-
 void ChatBot::ReceiveMessageFromUser(std::string message) {
   // loop over all edges and keywords and compute Levenshtein distance to
   // query
